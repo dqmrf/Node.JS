@@ -9,3 +9,5 @@ User.prototype.sayHello = function(who) {
 };
 
 exports.User = User;
+
+console.log(module);
