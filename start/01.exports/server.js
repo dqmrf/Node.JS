@@ -1,6 +1,21 @@
-var user = require('./user');
+var db = require('./database');
+// var db = require('database'); // NODE_PATH=.
+var log = require('logger')(module);
+var User = require('./user');
 
-var misha = new user.User('Misha');
-var undef = new user.User('Undefined');
+function run() {
+    // db.connect();
 
-misha.sayHello(undef);
+    var misha = new User('Misha');
+    var undef = new User('Undefined');
+
+    misha.sayHello(undef);
+    
+    log(db.getPhrase('Run succesfull'));
+}
+
+if (module.parent) {
+    exports.run = run;
+} else {
+    run();
+}

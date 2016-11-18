@@ -1,13 +1,14 @@
-var enRu = require('./en-ru');
+// var db = require('../database');
+var db = require('database'); // NODE_PATH=.
+var log = require('logger')(module);
+db.connect();
 
 function User(name) {
     this.name = name;
 }
 
 User.prototype.sayHello = function(who) {
-    console.log(enRu.Hello + ', ' +  who.name);
+    log(db.getPhrase('Hello') + ', ' +  who.name);
 };
 
-exports.User = User;
-
-console.log(module);
+module.exports = User;
