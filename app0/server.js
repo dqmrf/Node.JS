@@ -13,5 +13,5 @@ server.emit = function(event) {
 };
 
 server.on('request', function(request, respond) {
-    respond.end('The server is running... ' + ++counter);
+    respond.end('Server running on port 1337 ' + ++counter);
 });
