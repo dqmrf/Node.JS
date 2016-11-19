@@ -13,5 +13,5 @@ server.emit = function(event) {
 };
 
 server.on('request', function(request, respond) {
-    respond.end('Hello World! ' + ++counter);
+    respond.end('The server is running... ' + ++counter);
 });
