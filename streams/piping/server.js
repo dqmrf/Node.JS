@@ -1,13 +1,13 @@
 // const fs = require('fs');
 //
-// var readStream = fs.createReadStream('data1.md');
-// var writeStream = fs.createWriteStream('data2.md');
+// var readStream = fs.createReadStream('z-read.md');
+// var writeStream = fs.createWriteStream('z-write.md');
 //
 // readStream.pipe(writeStream);
 
 var fs = require('fs');
 var zlib = require('zlib');
 
-fs.createReadStream('gzipdata.md.tar.gz')
+fs.createReadStream('z-gzip-read.md.tar.gz')
     .pipe(zlib.createGunzip())
-    .pipe(fs.createWriteStream('output.md'));
+    .pipe(fs.createWriteStream('z-gzip-write.md'));

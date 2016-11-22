@@ -1,7 +1,7 @@
 const fs = require('fs');
 
-var readStream = fs.createReadStream('index.md');
-// var writeStream = fs.createWriteStream('index2.md');
+var readStream = fs.createReadStream('z-read.md');
+var writeStream = fs.createWriteStream('z-write.md');
 
 var data = '';
 
