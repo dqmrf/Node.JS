@@ -6,13 +6,13 @@ var writeStream = fs.createWriteStream('z-write.md');
 var counter = 0;
 
 readStream.on('data', (chunk) => {
-    console.log(counter++, writeStream.write(chunk));
+    console.log('{' + +counter++ + '}', writeStream.write(chunk));
 });
 
 writeStream.on('drain', () => {
-    console.log('++drain');
+    console.log('[drain]');
 });
 
-writeStream.on('end', () => {
-    console.log('++end');
+readStream.on('end', () => {
+    console.log('[end reading]');
 });
