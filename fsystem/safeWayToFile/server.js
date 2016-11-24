@@ -58,11 +58,60 @@ function sendFileSafe(filePath, response) {
 }
 
 function sendFile(filePath, response) {
-    fs.readFile(filePath, (err, content) => {
-        if (err) throw err;
+    var file = fs.createReadStream(filePath);
 
-        var mime = require('mime').lookup(filePath);
-        response.setHeader('Content-Type', mime + '; charset=utf-8');
-        response.end(content);
+    {
+        file.pipe(response);
+        // EQUAL {pipe}
+    }
+
+    file.on('error', (err) => {
+        response.statusCode = 500;
+        response.end('Server Error!');
+        console.error(err);
+    });
+
+    file
+        .on('open', () => {
+            console.log('~![open file]');
+        })
+        .on('close', () => {
+            console.log('~![close file]');
+        });
+
+    response.on('close', () => {
+        console.log('~![destroy file]');
+        file.destroy();
     });
 }
+
+// { // EQUAL {/pipe}
+//     file.on('readable', write);
+
+//     function write() {
+//         var chunk = file.read();
+
+//         if (chunk && !response.write(chunk)) {
+//             file.removeListener('readable', write);
+
+//             response.once('drain', () => {
+//                 file.on('readable', write);
+//                 write();
+//             });
+//         }
+//     }
+
+//     file.on('end', () => {
+//         response.end();
+//     });
+// }
+
+// function sendFile(filePath, response) {
+//     fs.readFile(filePath, (err, content) => {
+//         if (err) throw err;
+
+//         var mime = require('mime').lookup(filePath);
+//         response.setHeader('Content-Type', mime + '; charset=utf-8');
+//         response.end(content);
+//     });
+// }

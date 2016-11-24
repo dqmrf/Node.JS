@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>Long-polling Chat</title>
+</head>
+<body>
+    <div class="container">
+        <h3>Das ist Chat</h3>
+
+        <form id="publish" class="form-inline">
+            <input type="text" name="message">
+            <button type="submit" class="btn btn-primary">Send</button>
+        </form>
+
+        <ul id="messages"></ul>
+    </div>
+
+    <script>
+        publish.onsubmit = function() {
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('POST', '/publish', true);
+            xhr.send(JSON.stringify({message: this.elements.message.value}));
+
+            this.elements.message.value = '';
+
+            return false;
+        };
+
+        subscribe();
+
+        function subscribe() {
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', '/subscribe', true);
+
+            xhr.onload = function() {
+                var li = document.createElement('li');
+                li.textContent = this.responseText;
+                messages.appendChild(li);
+
+                subscribe();
+            }
+
+            xhr.onerror = xhr.onabort = function() {
+                setTimeout(subscribe, 500);
+            }
+
+            xhr.send('');
+        }
+    </script>
+</body>
+</html>

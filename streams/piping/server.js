@@ -18,5 +18,5 @@ writeStream.on('pipe', (src)=>{
 var stream = readStream.pipe(writeStream);
 
 stream.on('finish', ()=>{
-    console.log('[stream has finished]');
+    console.log('~![stream has finished]');
 });

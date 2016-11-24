@@ -2,7 +2,7 @@ const fs = require('fs');
 
 var writeStream = fs.createWriteStream('z-million.md');
 
-writeOneMillionTimes(writeStream, 'data\n', 'utf-8', ()=>{console.log('[end write in callback]')});
+writeOneMillionTimes(writeStream, 'data\n', 'utf-8', ()=>{console.log('~![end write in callback]')});
 
 function writeOneMillionTimes(writer, data, encoding, callback) {
     var i = 1000000;

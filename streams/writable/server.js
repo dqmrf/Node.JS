@@ -10,9 +10,9 @@ readStream.on('data', (chunk) => {
 });
 
 writeStream.on('drain', () => {
-    console.log('[drain]');
+    console.log('~![drain]');
 });
 
 readStream.on('end', () => {
-    console.log('[end reading]');
+    console.log('~![end-reading]');
 });
