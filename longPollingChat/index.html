@@ -38,6 +38,7 @@
             xhr.open('GET', '/subscribe', true);
 
             xhr.onload = function() {
+                console.log('subscribing');
                 var li = document.createElement('li');
                 li.textContent = this.responseText;
                 messages.appendChild(li);
@@ -49,7 +50,7 @@
                 setTimeout(subscribe, 500);
             }
 
-            xhr.send('');
+            xhr.send();
         }
     </script>
 </body>
