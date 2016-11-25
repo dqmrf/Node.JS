@@ -85,26 +85,26 @@ function sendFile(filePath, response) {
     });
 }
 
-// { // EQUAL {/pipe}
-//     file.on('readable', write);
+{ // EQUAL {/pipe}
+    file.on('readable', write);
 
-//     function write() {
-//         var chunk = file.read();
+    function write() {
+        var chunk = file.read();
 
-//         if (chunk && !response.write(chunk)) {
-//             file.removeListener('readable', write);
+        if (chunk && !response.write(chunk)) {
+            file.removeListener('readable', write);
 
-//             response.once('drain', () => {
-//                 file.on('readable', write);
-//                 write();
-//             });
-//         }
-//     }
+            response.once('drain', () => {
+                file.on('readable', write);
+                write();
+            });
+        }
+    }
 
-//     file.on('end', () => {
-//         response.end();
-//     });
-// }
+    file.on('end', () => {
+        response.end();
+    });
+}
 
 // function sendFile(filePath, response) {
 //     fs.readFile(filePath, (err, content) => {
