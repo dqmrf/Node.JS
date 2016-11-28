@@ -18,5 +18,9 @@
     "winston": "latest",
     "mongoose": "latest",
     "mongoose-bcrypt": "latest"
+  },
+  "devDependencies": {
+    "async": "^2.1.4",
+    "nconf": "^0.8.4"
   }
 }

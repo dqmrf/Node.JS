@@ -11,10 +11,6 @@ var schema = new Schema({
         unique: true,
         required: true
     },
-    // passw: {
-    //     type: String,
-    //     required: true
-    // },
     create: {
         type: Date,
         default: Date.now
